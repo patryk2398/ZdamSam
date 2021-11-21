@@ -1,0 +1,30 @@
+header
+{
+	width: 350px;
+	height: 100vh;
+	background-color: #102444;
+	border-top-right-radius: 50px;
+	border-bottom-right-radius: 50px;
+}
+
+img.logo
+{
+	width: 200px;
+	margin: 100px 50px;
+}
+
+nav
+{
+	color: #fff;
+}
+
+ul
+{
+	padding: 0;
+	margin: 0 50px;
+}
+
+nav ul li.active
+{
+	color: #00d154;
+}
