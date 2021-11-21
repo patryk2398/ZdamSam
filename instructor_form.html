@@ -12,7 +12,7 @@
 		<link rel="shortcut icon" href="graphics/favicon.ico" type="image/x-icon">
 		<link rel="icon" href="graphics/favicon.ico" type="image/x-icon">
 		<link rel="preconnect" href="https://fonts.gstatic.com">
-		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="css/reset.css">
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" href="css/style.css">
@@ -20,7 +20,7 @@
 	</head>
 	<body>
 		<header>
-			<img src="graphics/logo.png" class="logo">
+			<img src="graphics/logo.svg" class="logo">
 			<nav>
 				<ul>
 					<li>Dodaj zajęcia</li>
@@ -33,7 +33,17 @@
 			</nav>
 		</header>
 		<main>
-		
+			<h1>Formularz dodawania instruktorów</h1>
+			<form>
+				<input type="text" placeholder="Nazwa użytkownika" class="long">
+				<input type="text" placeholder="Imię" class="short">
+				<input type="text" placeholder="Nazwisko" class="short">
+				<input type="email" placeholder="Adres e-mail" class="short">
+				<input type="tel" placeholder="Numer telefonu" class="short">
+				<input type="password" placeholder="Hasło" class="short">
+				<input type="password" placeholder="Powtórz hasło" class="short">
+				<input type="submit" value="Dodaj instruktora!" class="long button">
+			</form>
 		</main>
 		<footer>
 		
