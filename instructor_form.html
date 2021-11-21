@@ -19,34 +19,45 @@
 		
 	</head>
 	<body>
-		<header>
-			<img src="graphics/logo.svg" class="logo">
-			<nav>
-				<ul>
-					<li>Dodaj zajęcia</li>
-					<li class="active">Dodaj instruktora</li>
-					<li>Dodaj kursanta</li>
-					<li>Lista samochodów</li>
-					<li>Materiały szkoleniowe</li>
-					<li>Terminarz</li>
-				</ul>
-			</nav>
-		</header>
-		<main>
-			<h1>Formularz dodawania instruktorów</h1>
-			<form>
-				<input type="text" placeholder="Nazwa użytkownika" class="long">
-				<input type="text" placeholder="Imię" class="short">
-				<input type="text" placeholder="Nazwisko" class="short">
-				<input type="email" placeholder="Adres e-mail" class="short">
-				<input type="tel" placeholder="Numer telefonu" class="short">
-				<input type="password" placeholder="Hasło" class="short">
-				<input type="password" placeholder="Powtórz hasło" class="short">
-				<input type="submit" value="Dodaj instruktora!" class="long button">
-			</form>
-		</main>
+		<div class="content">
+			<header>
+				<img src="graphics/logo.svg" class="logo">
+				<nav>
+					<ul>
+						<li><a href="#">Dodaj zajęcia</a></li>
+						<li class="active"><a href="#">Dodaj instruktora</a></li>
+						<li><a href="#">Dodaj kursanta</a></li>
+						<li><a href="#">Lista samochodów</a></li>
+						<li><a href="#">Materiały szkoleniowe</a></li>
+						<li><a href="#">Terminarz</a></li>
+					</ul>
+				</nav>
+			</header>
+			<main>
+				<h1>Formularz dodawania instruktorów</h1>
+				<form>
+					<input type="text" placeholder="Nazwa użytkownika" class="long">
+					<input type="text" placeholder="Imię" class="short">
+					<input type="text" placeholder="Nazwisko" class="short">
+					<input type="email" placeholder="Adres e-mail" class="short">
+					<input type="tel" placeholder="Numer telefonu" class="short">
+					<input type="password" placeholder="Hasło" class="short">
+					<input type="password" placeholder="Powtórz hasło" class="short">
+					<input type="submit" value="Dodaj instruktora!" class="long button">
+				</form>
+			</main>
+		</div>
 		<footer>
-		
+			<ul class="bottom-left-nav">
+				<li>O ZdamSam!</li>
+				<li>Cennik</li>
+				<li>Kontakt</li>
+			</ul>
+			<p>&copy; ZdamSam! 2021. Wszelkie prawa zastrzeżone.</p>
+			<ul>
+				<li>Regulamin</li>
+				<li>Polityka prywatności</li>
+			</ul>
 		</footer>
 		
 		<script src="js/bootstrap.min.js">
