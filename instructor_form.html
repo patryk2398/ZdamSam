@@ -35,13 +35,14 @@
 			</header>
 			<main>
 				<h1>Formularz dodawania instruktorów</h1>
-				<form>
-					<input type="text" placeholder="Nazwa użytkownika" class="long">
-					<input type="text" placeholder="Imię" class="short">
-					<input type="text" placeholder="Nazwisko" class="short">
-					<input type="email" placeholder="Adres e-mail" class="short">
-					<input type="tel" placeholder="Numer telefonu" class="short">
-					<input type="password" placeholder="Hasło" class="short">
+				<form action="instructor_add.php" method="post">
+					<input type="text" placeholder="Imię" class="short" name="name">
+					<input type="text" placeholder="Nazwisko" class="short" name="surname">
+					<input type="email" placeholder="Adres e-mail" class="short" name="email">
+					<input type="tel" placeholder="Numer telefonu" class="short" name="tel">
+					<input type="text" placeholder="PESEL" class="short" name="pesel">
+					<input placeholder="Data ważności uprawnień" class="short" type="text" onfocus="(this.type='date')" name="date">
+					<input type="password" placeholder="Hasło" class="short" name="password">
 					<input type="password" placeholder="Powtórz hasło" class="short">
 					<input type="submit" value="Dodaj instruktora!" class="long button">
 				</form>
