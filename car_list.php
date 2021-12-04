@@ -115,7 +115,16 @@
 						<p>Toyota Yaris</p>
 						
 					</div>
-				</div>				
+				</div>
+				<div>
+					<button id="addCar" class="confirm_button" >Dodaj pojazd</button>
+					<script type="text/javascript">
+						document.getElementById("addCar").onclick = function () 
+						{
+							location.href = "car_form.html";
+						};
+					</script>	
+				</div>	
 			</main>
 		</div>
 		<footer>

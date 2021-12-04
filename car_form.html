@@ -25,7 +25,7 @@
 				<nav>
 					<ul>
 						<li><a href="#">Dodaj zajęcia</a></li>
-						<li class="active"><a href="instructor_form.html">Dodaj instruktora</a></li>
+						<li><a href="instructor_form.html">Dodaj instruktora</a></li>
 						<li><a href="student_form.html">Dodaj kursanta</a></li>
 						<li><a href="car_list.php">Lista samochodów</a></li>
 						<li><a href="#">Materiały szkoleniowe</a></li>
@@ -35,17 +35,17 @@
 				</nav>
 			</header>
 			<main>
-				<h1>Formularz dodawania instruktorów</h1>
-				<form action="instructor_add.php" method="post">
-					<input type="text" placeholder="Imię" class="short" name="name">
-					<input type="text" placeholder="Nazwisko" class="short" name="surname">
-					<input type="email" placeholder="Adres e-mail" class="short" name="email">
-					<input type="tel" placeholder="Numer telefonu" class="short" name="tel">
-					<input type="text" placeholder="PESEL" class="short" name="pesel">
-					<input placeholder="Data ważności uprawnień" class="short" type="text" onfocus="(this.type='date')" name="date">
-					<input type="password" placeholder="Hasło" class="short" name="password">
-					<input type="password" placeholder="Powtórz hasło" class="short">
-					<input type="submit" value="Dodaj instruktora!" class="long button">
+				<h1>Formularz dodawania pojazdów</h1>
+				<form action="dbAddCar.php" method="post">
+					<input type="text" name="brand" placeholder="Marka" class="short">
+					<input type="text" name="model" placeholder="Model" class="short">
+					<input type="text" name="productionYear" placeholder="Rok Produkcji" class="short">
+					<input type="text" name="regNumber" placeholder="Numer Rejestracyjny" class="short">
+					<input type="text" name="mileage" placeholder="Przebieg" class="short">					
+					<input type="text" name="serviceDate" placeholder="Data Serwisowania" class="short" onfocus="(this.type='date')">					
+					<input type="text" name="ocDate" placeholder="Data OC" class="short" onfocus="(this.type='date')">				
+					<input type="text" name="acDate" placeholder="Data AC" class="short" onfocus="(this.type='date')">										
+					<input type="submit" value="Dodaj pojazd!" class="long button">
 				</form>
 			</main>
 		</div>
@@ -62,6 +62,6 @@
 			</ul>
 		</footer>
 		
-		<script src="js/bootstrap.min.js"></script>
+		<script src="js/bootstrap.min.js">
 	</body>
 </html>
