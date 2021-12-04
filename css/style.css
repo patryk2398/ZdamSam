@@ -193,4 +193,14 @@ div.imgcolumn p
 	visibility: visible;
 }
 
-
+.confirm_button
+{  
+	padding: 10px 20px;
+	margin: 10px;
+	outline: none;
+	border: none;
+	border-radius: 10px;
+	transition-duration: .5s;
+	background-color: #00d154;
+	transition-duration: .5s;
+}
