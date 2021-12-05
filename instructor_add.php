@@ -23,15 +23,23 @@ $email = $_POST['email'];
 
 
 $sql = "INSERT INTO `login`(`email`, `password`, `accountType`) VALUES ('$email', '$password', 1);";
-$last_id = $conn->insert_id;
-$sql .= "INSERT INTO `instructor`(`pesel`, `name`, `surname`, `telephone`, `renevalDate`, `login_id_login`) VALUES ('$pesel','$name','$surname','$telephone','$date', '$last_id')";
 
-if ($conn->multi_query($sql) === TRUE) {
+if ($conn->query($sql) === TRUE) {
     echo "New records created successfully";
-    header("Location:instructor_form.html");
   } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
   }
+ 
+$last_id = $conn->insert_id;
+$sql2= "INSERT INTO `instructor`(`pesel`, `name`, `surname`, `telephone`, `renevalDate`, `login_id_login`) VALUES ('$pesel','$name','$surname','$telephone','$date', '$last_id')";
+
+if ($conn->query($sql2) === TRUE) {
+  echo "New records created successfully";
+  // header("Location:instructor_form.html");
+} else {
+  echo "Error: " . $sql2 . "<br>" . $conn->error;
+}
+
 
 $conn->close();
 ?> 
