@@ -36,7 +36,6 @@
 					<input type="submit" value="Zaloguj" class="long button">
 				</form>
 				<?php
-					
 					if(isset($_GET["error"]))
 					{
 						$error = base64_decode($_GET["error"]);

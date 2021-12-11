@@ -18,8 +18,11 @@ if ($user&&$pass)
 	{
 	$dbusername = $row['email'];
 	$dbpassword = $row['password'];
+	$dbaccountType = $row['accountType'];
+	
 	session_start();
-	$_SESSION['login'] = 1;
+	$_SESSION['login'] = $dbusername;
+	$_SESSION['accountType'] = $dbaccountType;
 	header("location: car_list.php");
 	}
 	  
