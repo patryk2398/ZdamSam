@@ -35,6 +35,18 @@
 					<input type="password" name="pass" placeholder="Hasło" class="long">														
 					<input type="submit" value="Zaloguj" class="long button">
 				</form>
+				<?php
+					
+					if(isset($_GET["error"]))
+					{
+						$error = base64_decode($_GET["error"]);
+						if($error!="")
+						{
+							echo $error;
+						}
+					}
+				?>
+				
 			</main>
 		</div>
 		<footer>
