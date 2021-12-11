@@ -24,28 +24,16 @@
 				<img src="graphics/logo.svg" class="logo">
 				<nav>
 					<ul>
-						<li><a href="#">Dodaj zajęcia</a></li>
-						<li class="active"><a href="instructor_form.html">Dodaj instruktora</a></li>
-						<li><a href="student_form.html">Dodaj kursanta</a></li>
-						<li><a href="car_list.php">Lista samochodów</a></li>
-						<li><a href="#">Materiały szkoleniowe</a></li>
-						<li><a href="#">Terminarz</a></li>
-						<li><a href="login.html">Zaloguj</a></li>
+						<li class="active"><a href="login.php">Zaloguj</a></li>
 					</ul>
 				</nav>
 			</header>
 			<main>
-				<h1>Formularz dodawania instruktorów</h1>
-				<form action="instructor_add.php" method="post">
-					<input type="text" placeholder="Imię" class="short" name="name">
-					<input type="text" placeholder="Nazwisko" class="short" name="surname">
-					<input type="email" placeholder="Adres e-mail" class="short" name="email">
-					<input type="tel" placeholder="Numer telefonu" class="short" name="tel">
-					<input type="text" placeholder="PESEL" class="short" name="pesel">
-					<input placeholder="Data ważności uprawnień" class="short" type="text" onfocus="(this.type='date')" name="date">
-					<input type="password" placeholder="Hasło" class="short" name="password">
-					<input type="password" placeholder="Powtórz hasło" class="short">
-					<input type="submit" value="Dodaj instruktora!" class="long button">
+				<h1>Zaloguj się</h1>
+				<form action="dbLogin.php" method="post">
+					<input type="text" name="login" placeholder="Email" class="long">
+					<input type="password" name="pass" placeholder="Hasło" class="long">														
+					<input type="submit" value="Zaloguj" class="long button">
 				</form>
 			</main>
 		</div>

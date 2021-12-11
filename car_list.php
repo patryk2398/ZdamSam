@@ -25,11 +25,12 @@
 				<nav>
 					<ul>
 						<li><a href="#">Dodaj zajęcia</a></li>
-						<li><a href="instructor_form.html">Dodaj instruktora</a></li>
-						<li><a href="student_form.html">Dodaj kursanta</a></li>
+						<li><a href="instructor_form.php">Dodaj instruktora</a></li>
+						<li><a href="student_form.php">Dodaj kursanta</a></li>
 						<li class="active"><a href="car_list.php">Lista samochodów</a></li>
-						<li><a href="#">Materiały szkoleniowe</a></li>
-						<li><a href="#">Terminarz</a></li>
+						<li><a href="learning_materials.php">Materiały szkoleniowe</a></li>
+						<li><a href="schedule.php">Terminarz</a></li>
+						<li><a href="logout.php">Wyloguj się</a></li>
 					</ul>
 				</nav>
 			</header>

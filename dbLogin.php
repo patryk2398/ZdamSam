@@ -1,5 +1,5 @@
 <?php
-header( "refresh:0;url=login.html" );
+header( "refresh:0;url=login.php" );
 $user = $_POST['login'];
 $pass = md5($_POST['pass']);
 
@@ -19,6 +19,8 @@ if ($numrows!=0)
   {
     $dbusername = $row['email'];
     $dbpassword = $row['password'];
+	$_SESSION['login'] = $row['email'];
+	header("location: car_list.php");
   }
   
 }

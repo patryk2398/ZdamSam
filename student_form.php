@@ -1,3 +1,8 @@
+<?php
+	if(!isset($_SESSION['login']));
+	header("location: login.php");
+?>
+
 <!DOCTYPE html>
 <html lang="pl">
 	<head>
@@ -25,21 +30,32 @@
 				<nav>
 					<ul>
 						<li><a href="#">Dodaj zajęcia</a></li>
-						<li><a href="instructor_form.html">Dodaj instruktora</a></li>
-						<li><a href="student_form.html">Dodaj kursanta</a></li>
+						<li><a href="instructor_form.php">Dodaj instruktora</a></li>
+						<li class="active"><a href="student_form.php">Dodaj kursanta</a></li>
 						<li><a href="car_list.php">Lista samochodów</a></li>
-						<li><a href="#">Materiały szkoleniowe</a></li>
-						<li><a href="#">Terminarz</a></li>
-						<li><a href="login.html">Zaloguj</a></li>
+						<li><a href="learning_materials.php">Materiały szkoleniowe</a></li>
+						<li><a href="schedule.php">Terminarz</a></li>
+						<li><a href="logout.php">Wyloguj się</a></li>
 					</ul>
 				</nav>
 			</header>
 			<main>
-				<h1>Zaloguj się</h1>
-				<form action="dbLogin.php" method="post">
-					<input type="text" name="login" placeholder="Email" class="long">
-					<input type="password" name="pass" placeholder="Hasło" class="long">														
-					<input type="submit" value="Zaloguj" class="long button">
+				<h1>Formularz dodawania kursantów</h1>
+				<form>
+					<input type="text" placeholder="Nazwa użytkownika" class="long">
+					<input type="text" placeholder="Imię" class="short">
+					<input type="text" placeholder="Nazwisko" class="short">
+					<input type="email" placeholder="Adres e-mail" class="short">
+					<input type="tel" placeholder="Numer telefonu" class="short">
+					<input list="instructors" placeholder="Instruktor" class="long">
+					<datalist id="instructors">
+						<option value="Test1">
+						<option value="Test2">
+						<option value="Test3">
+					  </datalist>
+					<input type="password" placeholder="Hasło" class="short">
+					<input type="password" placeholder="Powtórz hasło" class="short">
+					<input type="submit" value="Dodaj kursanta!" class="long button">
 				</form>
 			</main>
 		</div>
@@ -56,6 +72,6 @@
 			</ul>
 		</footer>
 		
-		<script src="js/bootstrap.min.js"></script>
+		<script src="js/bootstrap.min.js">
 	</body>
 </html>

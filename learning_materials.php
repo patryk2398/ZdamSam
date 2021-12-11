@@ -1,3 +1,8 @@
+<?php
+	if(!isset($_SESSION['login']));
+	header("location: login.php");
+?>
+
 <!DOCTYPE html>
 <html lang="pl">
 	<head>
@@ -25,12 +30,12 @@
 				<nav>
 					<ul>
 						<li><a href="#">Dodaj zajęcia</a></li>
-						<li><a href="instructor_form.html">Dodaj instruktora</a></li>
-						<li class="active"><a href="student_form.html">Dodaj kursanta</a></li>
+						<li><a href="instructor_form.php">Dodaj instruktora</a></li>
+						<li class="active"><a href="student_form.php">Dodaj kursanta</a></li>
 						<li><a href="car_list.php">Lista samochodów</a></li>
 						<li><a href="#">Materiały szkoleniowe</a></li>
 						<li><a href="#">Terminarz</a></li>
-						<li><a href="login.html">Zaloguj</a></li>
+						<li><a href="logout.php">Wyloguj się</a></li>
 					</ul>
 				</nav>
 			</header>
