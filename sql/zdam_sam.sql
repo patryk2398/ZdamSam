@@ -148,7 +148,7 @@ CREATE INDEX `fk_trainee_has_teoreticalSchedule_trainee_idx` ON `zdamsam`.`train
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `zdamsam`.`practicalSchedule` (
   `id_practicalSchedule` INT NOT NULL,
-  `date` DATE NULL,
+  `date` DATETIME NULL,
   `skipped` TINYINT NULL,
   `trainee_id_trainee` INT NOT NULL,
   `cars_id_cars` INT NOT NULL,
