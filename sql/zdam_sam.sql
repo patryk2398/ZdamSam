@@ -43,10 +43,16 @@ CREATE TABLE IF NOT EXISTS `zdamsam`.`trainee` (
   `externalTeoreticalPoints` VARCHAR(45) NULL,
   `externalPracticalPass` TINYINT NULL,
   `login_id_login` INT NOT NULL,
+  `instructor_id_instructor` INT NOT NULL,
   PRIMARY KEY (`id_trainee`, `login_id_login`),
   CONSTRAINT `fk_trainee_login1`
     FOREIGN KEY (`login_id_login`)
     REFERENCES `zdamsam`.`login` (`id_login`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+  CONSTRAINT `fk_trainee_instructor1`
+    FOREIGN KEY (`instructor_id_instructor`)
+    REFERENCES `zdamsam`.`instructor` (`id_instructor`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
