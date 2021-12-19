@@ -24,7 +24,7 @@
 				<img src="graphics/logo.svg" class="logo">
 				<nav>
 					<ul>
-						<li><a href="#">Dodaj zajęcia</a></li>
+						<li><a href="addPracticalScheduleForm.php">Dodaj zajęcia</a></li>
 						<li><a href="instructor_form.php">Dodaj instruktora</a></li>
 						<li><a href="student_form.php">Dodaj kursanta</a></li>
 						<li class="active"><a href="car_list.php">Lista samochodów</a></li>
