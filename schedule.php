@@ -1,6 +1,7 @@
 <?php
-	if(!isset($_SESSION['login']));
-	header("location: login.php");
+	session_start();
+	if(!isset($_SESSION['login']))
+		header("location: login.php");
 ?>
 
 <!DOCTYPE html>
@@ -40,23 +41,58 @@
 				</nav>
 			</header>
 			<main>
-				<h1>Formularz dodawania kursantów</h1>
-				<form>
-					<input type="text" placeholder="Nazwa użytkownika" class="long">
-					<input type="text" placeholder="Imię" class="short">
-					<input type="text" placeholder="Nazwisko" class="short">
-					<input type="email" placeholder="Adres e-mail" class="short">
-					<input type="tel" placeholder="Numer telefonu" class="short">
-					<input list="instructors" placeholder="Instruktor" class="long">
-					<datalist id="instructors">
-						<option value="Test1">
-						<option value="Test2">
-						<option value="Test3">
-					  </datalist>
-					<input type="password" placeholder="Hasło" class="short">
-					<input type="password" placeholder="Powtórz hasło" class="short">
-					<input type="submit" value="Dodaj kursanta!" class="long button">
-				</form>
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<?php 
+							$day = date('w');
+							$week_start = date('d-m-Y', strtotime('-'.$day.' days'));
+						?>
+						<?php for ($i = 0; $i < 6; $i++): ?>
+							<td>
+								<?php 
+								if($i != 0)
+									echo date('d-m-Y', strtotime($week_start. "+$i days"));
+								 ?>
+							</td>
+						<?php endfor; ?>
+					</tr>
+				</thead>
+				<tbody>
+					<?php for ($i = 0; $i < 8; $i+=2): ?>
+						<tr></tr>
+						<th scope="row"><?php echo((8 + $i). ":00-". (10 + $i). ":00")?></th>
+						<?php for ($j = 1; $j < 6; $j++): ?>
+							<?php 
+								$email = $_SESSION['login'];
+								$date = date('Y-m-d H:i:s', strtotime($week_start. "+$j days +". (8 + $i). "hours"));
+								include('dbConnect.php');
+								$records = mysqli_query($con,"SELECT t.name, t.surname 
+								FROM trainee t
+								INNER  JOIN practicalschedule ps ON t.id_trainee = ps.trainee_id_trainee
+								INNER JOIN instructor i ON ps.instructor_id_instructor = i.id_instructor
+								INNER JOIN login l ON i.login_id_login = l.id_login
+								WHERE l.email = '$email'
+								AND ps.date = '$date'
+								LIMIT 1");
+
+								if($data = mysqli_fetch_array($records))
+								{
+									$trainee = "";
+									$trainee .= $data['name'];
+									$trainee .= " ";
+									$trainee .= $data['surname'];
+									echo "<td class=\"bg-warning\">$trainee</td>";
+								}
+								else
+								{
+									echo "<td class=\"bg-success\"></td>";
+								}							
+							?>							
+						<?php endfor; ?>
+					<?php endfor; ?>		
+				</tbody>
+				</table>
 			</main>
 		</div>
 		<footer>
