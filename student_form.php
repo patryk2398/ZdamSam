@@ -52,6 +52,7 @@
 					<input type="email" placeholder="Adres e-mail" class="short" name="email">
 					<input type="tel" placeholder="Numer telefonu" class="short" name="tel">
 					<select placeholder="Instruktor" class="long" name="instructor">
+						<option disabled selected value>Wybierz instruktora</option>
 						<?php
 							$connect = mysqli_connect("localhost","root","","zdamsam");
 							
