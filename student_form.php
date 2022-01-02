@@ -44,19 +44,35 @@
 			</header>
 			<main>
 				<h1>Formularz dodawania kursantów</h1>
-				<form>
-					<input type="text" placeholder="Nazwa użytkownika" class="long">
-					<input type="text" placeholder="Imię" class="short">
-					<input type="text" placeholder="Nazwisko" class="short">
-					<input type="email" placeholder="Adres e-mail" class="short">
-					<input type="tel" placeholder="Numer telefonu" class="short">
-					<input list="instructors" placeholder="Instruktor" class="long">
-					<datalist id="instructors">
-						<option value="Test1">
-						<option value="Test2">
-						<option value="Test3">
-					  </datalist>
-					<input type="password" placeholder="Hasło" class="short">
+				<form action="student_add.php" method="post">
+				
+					<input type="text" placeholder="Imię" class="short" name="name">
+					<input type="text" placeholder="Nazwisko" class="short" name="surname">
+					<input type="text" placeholder="PESEL" class="long" name="pesel">
+					<input type="email" placeholder="Adres e-mail" class="short" name="email">
+					<input type="tel" placeholder="Numer telefonu" class="short" name="tel">
+					<select placeholder="Instruktor" class="long" name="instructor">
+						<?php
+							$connect = mysqli_connect("localhost","root","","zdamsam");
+							
+							foreach (mysqli_query($connect, "SELECT id_instructor, name, surname FROM instructor") as $row)
+							{
+								echo  "<option value=".$row['id_instructor'].">".$row['name']."&nbsp;".$row['surname']."</option>"; // Format for adding options 
+							}
+							
+							/*while($numrows > 0)
+							{
+								while ($row = mysqli_fetch_assoc($query))
+								{
+									$instructorName = $row['name'];
+									$instructorSurname = $row['surname'];
+								}
+								echo "<option value=".$instructorName." ".$instructorSurname.">";
+								$numrows -= 1;
+							}*/
+						?>
+					</select>
+					<input type="password" placeholder="Hasło" class="short" name="password">
 					<input type="password" placeholder="Powtórz hasło" class="short">
 					<input type="submit" value="Dodaj kursanta!" class="long button">
 				</form>
