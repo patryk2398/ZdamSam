@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `zdamsam`.`trainee` (
     FOREIGN KEY (`login_id_login`)
     REFERENCES `zdamsam`.`login` (`id_login`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE NO ACTION,
   CONSTRAINT `fk_trainee_instructor1`
     FOREIGN KEY (`instructor_id_instructor`)
     REFERENCES `zdamsam`.`instructor` (`id_instructor`)
