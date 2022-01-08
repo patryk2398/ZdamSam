@@ -55,6 +55,7 @@
 								$student .= $data['surname'];
 
 								echo "<option value='". $student ."'>";
+								$student = '';
 							}	
 						?>  
 					</datalist>

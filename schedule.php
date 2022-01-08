@@ -32,21 +32,30 @@
 					<ul>
 						<li><a href="addPracticalScheduleForm.php">Dodaj zajęcia</a></li>
 						<li><a href="instructor_form.php">Dodaj instruktora</a></li>
-						<li class="active"><a href="student_form.php">Dodaj kursanta</a></li>
+						<li><a href="student_form.php">Dodaj kursanta</a></li>
 						<li><a href="car_list.php">Lista samochodów</a></li>
 						<li><a href="#">Materiały szkoleniowe</a></li>
-						<li><a href="#">Terminarz</a></li>
+						<li class="active"><a href="schedule.php">Terminarz</a></li>
+						<li><a href="progress.php">Postępy</a></li>
 						<li><a href="logout.php">Wyloguj się</a></li>
 					</ul>
 				</nav>
 			</header>
 			<main>
+			<h1>Terminarz zajęć</h1>			
 			<table class="table table-bordered">
 				<thead>
 					<tr>
 						<?php 
+							if (empty($_GET)) {
+								$date = date("Y/m/d");
+							}
+							else{
+								$date = $_GET['date'];
+							}
+							
 							$day = date('w');
-							$week_start = date('d-m-Y', strtotime('-'.$day.' days'));
+							$week_start = date('d-m-Y', strtotime($date .'-'.$day.' days'));
 						?>
 						<?php for ($i = 0; $i < 6; $i++): ?>
 							<td>
@@ -93,6 +102,14 @@
 					<?php endfor; ?>		
 				</tbody>
 				</table>
+				<div class="d-flex justify-content-between w-100">
+					<div class="d-flex justify-content-start ">
+						<a href="schedule.php?date=<?php echo date('d-m-Y', strtotime($date . '-6 days')); ?>" class="btn btn-primary"><</a>
+					</div>
+					<div class="d-flex justify-content-end ">
+						<a href="schedule.php?date=<?php echo date('d-m-Y', strtotime($date . '+8 days')); ?>" class="btn btn-primary">></a>
+					</div>
+				</div>
 			</main>
 		</div>
 		<footer>
