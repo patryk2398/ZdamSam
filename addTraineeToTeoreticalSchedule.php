@@ -26,15 +26,18 @@ VALUES (
     (SELECT id_teoreticalShedule FROM teoreticalschedule ORDER BY id_teoreticalShedule DESC LIMIT 1)
     )";
 	$result = mysqli_query($conn, $sql);
-	if ( false===$result ) {
-  printf("error: %s\n", mysqli_error($conn));
-}
-else {
-  echo 'done.';
-}
 }
 
-
+if ($conn->query($sql) === TRUE) 
+{
+  $_SESSION['success'] = '<span style="color:green">Pomyślnie dodano</span>';
+  header('Location: addTeoreticallScheduleForm.php');
+} 
+else
+{
+  $_SESSION['error'] = '<span style="color:red">Wystąpił błąd podczas dodawania</span>';
+  header('Location: addTeoreticalScheduleForm.php');
+}
 
 $conn->close();
 ?> 
