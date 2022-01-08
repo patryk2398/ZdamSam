@@ -76,7 +76,7 @@
 								$email = $_SESSION['login'];
 								$date = date('Y-m-d H:i:s', strtotime($week_start. "+$j days +". (8 + $i). "hours"));
 								include('dbConnect.php');
-								$records = mysqli_query($con,"SELECT t.name, t.surname 
+								$practical = mysqli_query($con,"SELECT t.name, t.surname 
 								FROM trainee t
 								INNER  JOIN practicalschedule ps ON t.id_trainee = ps.trainee_id_trainee
 								INNER JOIN instructor i ON ps.instructor_id_instructor = i.id_instructor
@@ -85,7 +85,15 @@
 								AND ps.date = '$date'
 								LIMIT 1");
 
-								if($data = mysqli_fetch_array($records))
+								$teoretical = mysqli_query($con,"SELECT t.id_teoreticalShedule
+								FROM teoreticalschedule t
+								INNER JOIN instructor i ON instructor_id_instructor = i.id_instructor
+								INNER JOIN login l ON i.login_id_login = l.id_login
+								WHERE l.email = '$email'
+								AND t.date = '$date'
+								LIMIT 1");
+
+								if($data = mysqli_fetch_array($practical))
 								{
 									$trainee = "";
 									$trainee .= $data['name'];
@@ -93,10 +101,14 @@
 									$trainee .= $data['surname'];
 									echo "<td class=\"bg-warning\">$trainee</td>";
 								}
+								else if(mysqli_fetch_array($teoretical))
+								{
+									echo "<td class=\"bg-warning\">Teoria</td>";
+								}	
 								else
 								{
 									echo "<td class=\"bg-success\"></td>";
-								}							
+								}						
 							?>							
 						<?php endfor; ?>
 					<?php endfor; ?>		

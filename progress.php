@@ -43,8 +43,69 @@
 			</header>
 			<main>
 			<h1>Postępy</h1>
-			<div>
-				<label>Liczba godzin praktycznych</label>
+			<div class="w-100">
+				<div class="mb-4">
+					<div class="d-flex justify-content-between w-100">
+						<div class="d-flex justify-content-start ">
+							<label>Liczba godzin praktycznych</label>
+						</div>
+						<div class="d-flex justify-content-end ">
+							<label>
+								<?php  
+									$practicalHours = 0;
+									$email = $_SESSION['login'];
+									include('dbConnect.php');
+									$records = mysqli_query($con,"SELECT COUNT(1) * 2 AS quantity
+									FROM practicalschedule 
+									INNER JOIN trainee ON trainee_id_trainee = id_trainee
+									INNER JOIN login ON login_id_login = id_login
+									WHERE email = '$email' AND
+									date < NOW()");
+	
+									if($data = mysqli_fetch_array($records))
+									{
+										$practicalHours = $data['quantity'];										
+									}
+									echo $practicalHours;	
+								?>
+							/30</label>
+						</div>
+					</div>					
+					<div class="progress">
+						<div class="progress-bar" role="progressbar" style="width: <?php echo $practicalHours/30*100?>%" aria-valuenow="<?php echo $practicalHours/30*100?>" aria-valuemin="0" aria-valuemax="100"></div>
+					</div>
+				</div>
+				<div class="d-flex justify-content-between w-100">
+						<div class="d-flex justify-content-start ">
+							<label>Liczba godzin teoretycznych</label>
+						</div>
+						<div class="d-flex justify-content-end ">
+							<label>
+								<?php  
+									$practicalHours = 0;
+									$email = $_SESSION['login'];
+									include('dbConnect.php');
+									$records = mysqli_query($con,"SELECT COUNT(1) * 2 AS quantity
+									FROM trainee_has_teoreticalschedule 
+									INNER JOIN trainee ON trainee_id_trainee = id_trainee
+									INNER JOIN login ON login_id_login = id_login
+									INNER JOIN teoreticalschedule ON teoreticalSchedule_id_teoreticalShedule = id_teoreticalShedule
+									WHERE email = '$email' AND
+									date < NOW()");
+	
+									if($data = mysqli_fetch_array($records))
+									{
+										$practicalHours = $data['quantity'];										
+									}
+									echo $practicalHours;	
+								?>
+							/20</label>
+						</div>
+					</div>					
+					<div class="progress">
+						<div class="progress-bar" role="progressbar" style="width: <?php echo $practicalHours/20*100?>%" aria-valuenow="<?php echo $practicalHours/20*100?>" aria-valuemin="0" aria-valuemax="100"></div>
+					</div>
+				</div>
 			</div>
 			</main>
 		</div>
