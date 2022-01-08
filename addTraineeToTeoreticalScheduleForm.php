@@ -1,11 +1,3 @@
-<?php
-	session_start();
-	if(!isset($_SESSION['login']))
-	{
-		header("location: login.php");
-	}
-?>
-
 <!DOCTYPE html>
 <html lang="pl">
 	<head>
@@ -32,9 +24,9 @@
 				<img src="graphics/logo.svg" class="logo">
 				<nav>
 					<ul>
-						<li><a href="addPracticalScheduleForm.php">Dodaj zajęcia</a></li>
+						<li class="active"><a href="addPracticalScheduleForm.php">Dodaj zajęcia</a></li>
 						<li><a href="instructor_form.php">Dodaj instruktora</a></li>
-						<li class="active"><a href="student_form.php">Dodaj kursanta</a></li>
+						<li><a href="student_form.php">Dodaj kursanta</a></li>
 						<li><a href="car_list.php">Lista samochodów</a></li>
 						<li><a href="learning_materials.php">Materiały szkoleniowe</a></li>
 						<li><a href="schedule.php">Terminarz</a></li>
@@ -43,30 +35,33 @@
 				</nav>
 			</header>
 			<main>
-				<h1>Formularz dodawania kursantów</h1>
-				<form action="student_add.php" method="post">
-				
-					<input type="text" placeholder="Imię" class="short" name="name">
-					<input type="text" placeholder="Nazwisko" class="short" name="surname">
-					<input type="text" placeholder="PESEL" class="long" name="pesel">
-					<input type="email" placeholder="Adres e-mail" class="short" name="email">
-					<input type="tel" placeholder="Numer telefonu" class="short" name="tel">
-					<select placeholder="Instruktor" class="long" name="instructor">
-						<option disabled selected value>Wybierz instruktora</option>
+				<h1>Dodaj kursantów</h1>
+				<form action="addTraineeToTeoreticalSchedule.php" method="post">
+					<select class="long" name="trainee[]" multiple>
 						<?php
 							$connect = mysqli_connect("localhost","root","","zdamsam");
 							
-							foreach (mysqli_query($connect, "SELECT id_instructor, name, surname FROM instructor") as $row)
+							foreach (mysqli_query($connect, "SELECT id_trainee, name, surname FROM trainee") as $row)
 							{
-								echo  "<option value=".$row['id_instructor'].">".$row['name']."&nbsp;".$row['surname']."</option>"; // Format for adding options 
+								echo  "<option value=".$row['id_trainee'].">".$row['name']."&nbsp;".$row['surname']."</option>"; // Format for adding options 
 							}
 
 						?>
-					</select>
-					<input type="password" placeholder="Hasło" class="short" name="password">
-					<input type="password" placeholder="Powtórz hasło" class="short">
-					<input type="submit" value="Dodaj kursanta!" class="long button">
+						</select>
+					<input type="submit" value="Dodaj kursantów" class="long button">
 				</form>
+				<?php
+					if(isset($_SESSION['error']))
+					{
+						echo $_SESSION['error'];
+						unset($_SESSION['error']);
+					}						
+					if(isset($_SESSION['success']))
+					{
+						echo $_SESSION['success'];
+						unset($_SESSION['success']);
+					}						
+				?>
 			</main>
 		</div>
 		<footer>
@@ -82,6 +77,6 @@
 			</ul>
 		</footer>
 		
-		<script src="js/bootstrap.min.js">
+		<script src="js/bootstrap.min.js"></script>
 	</body>
 </html>

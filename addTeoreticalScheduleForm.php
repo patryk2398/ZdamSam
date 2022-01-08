@@ -38,25 +38,6 @@
 				<h1>Dodaj zajęcia </h1>
 				<h2><a style="opacity: 0.4;" href="addPracticalScheduleForm.php">praktyczne</a> <a href="addTeoreticalScheduleForm.Php">teoretyczne</a></h2>
 				<form action="addTeoreticalSchedule.php" method="post">
-					<input autocomplete="off" list="instructor" placeholder="Instruktor" class="long" name="instructor">
-					<datalist id="instructor">
-						<?php
-							session_start();							
-							$email = $_SESSION['login'];
-							include('dbConnect.php');
-							$records = mysqli_query($con,"SELECT name, surname FROM instructor;");
-
-							while($data = mysqli_fetch_array($records))
-							{
-								$instructor .= $data['name'];
-								$instructor .= " ";
-								$instructor .= $data['surname'];
-
-								echo "<option value='". $instructor ."'>";
-								$instructor = '';
-							}	
-						?>  
-					</datalist>
 					<input placeholder="Data zajęć" class="short" type="text" onfocus="(this.type='date')" name="date">
 					<input list="times" placeholder="Czas zajęć" class="short" name="time">
 					<datalist id="times">
