@@ -2,6 +2,7 @@ body
 {
 	font-family: 'Nunito Sans', sans-serif;
 	color: #102444;
+	overflow-x: hidden;
 }
 
 a
