@@ -36,45 +36,24 @@
 			</header>
 			<main>
 				<h1>Dodaj zajęcia </h1>
-				<h2><a href="addPracticalScheduleForm.php">praktyczne</a> <a style="opacity: 0.4;" href="addTeoreticalScheduleForm.Php">teoretyczne</a></h2>
-				<form action="addPracticalSchedule.php" method="post">
-					<input autocomplete="off" list="trainee" placeholder="Kursant" class="short" name="trainee">
-					<datalist id="trainee">
+				<h2><a style="opacity: 0.4;" href="addPracticalScheduleForm.php">praktyczne</a> <a href="addTeoreticalScheduleForm.Php">teoretyczne</a></h2>
+				<form action="addTeoreticalSchedule.php" method="post">
+					<input autocomplete="off" list="instructor" placeholder="Instruktor" class="long" name="instructor">
+					<datalist id="instructor">
 						<?php
 							session_start();							
 							$email = $_SESSION['login'];
 							include('dbConnect.php');
-							$records = mysqli_query($con,"SELECT t.name, t.surname FROM trainee t
-							INNER JOIN instructor i ON instructor_id_instructor = id_instructor
-							INNER JOIN login ON i.login_id_login = id_login 
-							WHERE email = '$email'");
+							$records = mysqli_query($con,"SELECT name, surname FROM instructor;");
 
 							while($data = mysqli_fetch_array($records))
 							{
-								$student .= $data['name'];
-								$student .= " ";
-								$student .= $data['surname'];
+								$instructor .= $data['name'];
+								$instructor .= " ";
+								$instructor .= $data['surname'];
 
-								echo "<option value='". $student ."'>";
-								$student = '';
-							}	
-						?>  
-					</datalist>
-					<input list="cars" autocomplete="off" placeholder="Samochód" class="short" name="car">
-					<datalist id="cars">
-						<?php
-							include('dbConnect.php');
-							$records = mysqli_query($con,"SELECT brand, model, regNumber FROM `cars`");
-
-							while($data = mysqli_fetch_array($records))
-							{
-								$car .= $data['brand'];
-								$car .= " ";
-								$car .= $data['model'];
-								$car .= " ";
-								$car .= $data['regNumber'];
-
-								echo "<option value='". $car ."'>";
+								echo "<option value='". $instructor ."'>";
+								$instructor = '';
 							}	
 						?>  
 					</datalist>
