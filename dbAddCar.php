@@ -11,5 +11,5 @@ mysqli_close($con);
 ?>
 <html>
 <p>Za chwilę zostaniesz przeniesiony</p>
-<meta http-equiv="refresh" content="0;url=car_form.html" />
+<meta http-equiv="refresh" content="0;url=car_form.php" />
 </html>

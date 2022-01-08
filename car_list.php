@@ -43,8 +43,33 @@
 				</nav>
 			</header>
 			<main>
-				<h1>Lista Samochodów</h1>			
-				<div class="imgrow">
+				<h1>Lista Samochodów</h1>		
+				<div class="container">
+				<?php
+							$servername = "localhost";
+							$username = "root";
+							$password = "";
+							$dbname = "zdamsam";
+
+							// Create connection
+							$conn = new mysqli($servername, $username, $password, $dbname);
+							// Check connection
+							if ($conn->connect_error) {
+							die("Connection failed: " . $conn->connect_error);
+							}
+							$sql = "SELECT * FROM cars";
+							$result = $conn->query($sql);
+							if ($result->num_rows > 0) {
+								// output data of each row
+								while($row = $result->fetch_assoc()) {
+									echo "<div class='row'><div class='col'>".$row["picture"]."</div><div class='col-8 text-nowrap'>Marka:".$row["brand"]."<br>Model:".$row["model"]."<br>Rok produkcji:".$row["productionYear"]."<br>Numer rejestracyjny:".$row["regNumber"]."<br>Przebieg:".$row["mileage"]."<br>Data następnego serwisu:".$row["serviceDate"]."<br>Data ważności OC:".$row["ocDate"]."<br>Data ważności AC:".$row["acDate"]."<br></div></div>";
+								}
+							} else {
+								echo "0 results";
+							}
+						?>
+				</div>		
+				<!-- <div class="imgrow">
 					<div class="imgcolumn">						
 						<div class="car_img">	
 							<img src="graphics/cars/car_1.jpg" width="256" height="144" class="carimage">	
@@ -124,16 +149,16 @@
 						<p>Toyota Yaris</p>
 						
 					</div>
-				</div>
+				</div> -->
 				<div>
 					<button id="addCar" class="confirm_button" >Dodaj pojazd</button>
 					<script type="text/javascript">
 						document.getElementById("addCar").onclick = function () 
 						{
-							location.href = "car_form.html";
+							location.href = "car_form.php";
 						};
 					</script>	
-				</div>	
+				</div>
 			</main>
 		</div>
 		<footer>
@@ -149,6 +174,6 @@
 			</ul>
 		</footer>
 		
-		<script src="js/bootstrap.min.js">
+		<script src="js/bootstrap.min.js"></script>
 	</body>
 </html>
