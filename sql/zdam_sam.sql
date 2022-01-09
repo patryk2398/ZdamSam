@@ -21,7 +21,7 @@ USE `zdamsam` ;
 -- Table `zdamsam`.`login`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `zdamsam`.`login` (
-  `id_login` INT NOT NULL,
+  `id_login` INT NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(45) NULL,
   `password` VARCHAR(45) NULL,
   `accountType` TINYINT NULL,
@@ -30,10 +30,31 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `zdamsam`.`instructor`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `zdamsam`.`instructor` (
+  `id_instructor` INT NOT NULL AUTO_INCREMENT,
+  `pesel` VARCHAR(45) NOT NULL,
+  `name` VARCHAR(45) NOT NULL,
+  `surname` VARCHAR(45) NOT NULL,
+  `telephone` VARCHAR(45) NOT NULL,
+  `renevalDate` DATETIME NOT NULL,
+  `login_id_login` INT NOT NULL,
+  PRIMARY KEY (`id_instructor`, `login_id_login`),
+  CONSTRAINT `fk_instructor_login1`
+    FOREIGN KEY (`login_id_login`)
+    REFERENCES `zdamsam`.`login` (`id_login`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+CREATE INDEX `fk_instructor_login1_idx` ON `zdamsam`.`instructor` (`login_id_login` ASC);
+
+-- -----------------------------------------------------
 -- Table `zdamsam`.`trainee`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `zdamsam`.`trainee` (
-  `id_trainee` INT NOT NULL,
+  `id_trainee` INT NOT NULL AUTO_INCREMENT,
   `pesel` VARCHAR(45) NOT NULL,
   `name` VARCHAR(45) NOT NULL,
   `surname` VARCHAR(45) NOT NULL,
@@ -64,7 +85,7 @@ CREATE INDEX `fk_trainee_login1_idx` ON `zdamsam`.`trainee` (`login_id_login` AS
 -- Table `zdamsam`.`cars`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `zdamsam`.`cars` (
-  `id_cars` INT NOT NULL,
+  `id_cars` INT NOT NULL AUTO_INCREMENT,
   `brand` VARCHAR(45) NOT NULL,
   `model` VARCHAR(45) NOT NULL,
   `productionYear` VARCHAR(45) NOT NULL,
@@ -78,33 +99,12 @@ CREATE TABLE IF NOT EXISTS `zdamsam`.`cars` (
 ENGINE = InnoDB;
 
 
--- -----------------------------------------------------
--- Table `zdamsam`.`instructor`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `zdamsam`.`instructor` (
-  `id_instructor` INT NOT NULL,
-  `pesel` VARCHAR(45) NOT NULL,
-  `name` VARCHAR(45) NOT NULL,
-  `surname` VARCHAR(45) NOT NULL,
-  `telephone` VARCHAR(45) NOT NULL,
-  `renevalDate` DATETIME NOT NULL,
-  `login_id_login` INT NOT NULL,
-  PRIMARY KEY (`id_instructor`, `login_id_login`),
-  CONSTRAINT `fk_instructor_login1`
-    FOREIGN KEY (`login_id_login`)
-    REFERENCES `zdamsam`.`login` (`id_login`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-CREATE INDEX `fk_instructor_login1_idx` ON `zdamsam`.`instructor` (`login_id_login` ASC);
-
 
 -- -----------------------------------------------------
 -- Table `zdamsam`.`teoreticalSchedule`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `zdamsam`.`teoreticalSchedule` (
-  `id_teoreticalShedule` INT NOT NULL,
+  `id_teoreticalShedule` INT NOT NULL AUTO_INCREMENT,
   `date` DATETIME NULL,
   `skipped` TINYINT NULL,
   `instructor_id_instructor` INT NOT NULL,
@@ -123,7 +123,7 @@ CREATE INDEX `fk_teoreticalSchedule_instructor1_idx` ON `zdamsam`.`teoreticalSch
 -- Table `zdamsam`.`trainee_has_teoreticalSchedule`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `zdamsam`.`trainee_has_teoreticalSchedule` (
-  `trainee_id_trainee` INT NOT NULL,
+  `trainee_id_trainee` INT NOT NULL AUTO_INCREMENT,
   `teoreticalSchedule_id_teoreticalShedule` INT NOT NULL,
   PRIMARY KEY (`trainee_id_trainee`, `teoreticalSchedule_id_teoreticalShedule`),
   CONSTRAINT `fk_trainee_has_teoreticalSchedule_trainee`
@@ -147,7 +147,7 @@ CREATE INDEX `fk_trainee_has_teoreticalSchedule_trainee_idx` ON `zdamsam`.`train
 -- Table `zdamsam`.`practicalSchedule`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `zdamsam`.`practicalSchedule` (
-  `id_practicalSchedule` INT NOT NULL,
+  `id_practicalSchedule` INT NOT NULL AUTO_INCREMENT,
   `date` DATETIME NULL,
   `skipped` TINYINT NULL,
   `trainee_id_trainee` INT NOT NULL,
@@ -182,7 +182,7 @@ CREATE INDEX `fk_practicalSchedule_instructor1_idx` ON `zdamsam`.`practicalSched
 -- Table `zdamsam`.`trainingMaterials`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `zdamsam`.`trainingMaterials` (
-  `id_trainingMaterials` INT NOT NULL,
+  `id_trainingMaterials` INT NOT NULL AUTO_INCREMENT,
   `text` LONGTEXT NULL,
   `date` DATE NULL,
   `title` VARCHAR(200) NULL,
@@ -194,7 +194,7 @@ ENGINE = InnoDB;
 -- Table `zdamsam`.`trainingMedia`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `zdamsam`.`trainingMedia` (
-  `id_trainingMedia` INT NOT NULL,
+  `id_trainingMedia` INT NOT NULL AUTO_INCREMENT,
   `mediaName` VARCHAR(200) NULL,
   `blob` BLOB NULL,
   `trainingMaterials_id_trainingMaterials` INT NOT NULL,
