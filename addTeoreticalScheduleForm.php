@@ -1,3 +1,10 @@
+<?php
+	session_start();
+	if(!isset($_SESSION['login']))
+	{
+		header("location: login.php");
+	}
+?>
 <!DOCTYPE html>
 <html lang="pl">
 	<head>
@@ -24,12 +31,39 @@
 				<img src="graphics/logo.svg" class="logo">
 				<nav>
 					<ul>
-						<li class="active"><a href="addPracticalScheduleForm.php">Dodaj zajęcia</a></li>
-						<li><a href="instructor_form.php">Dodaj instruktora</a></li>
-						<li><a href="student_form.php">Dodaj kursanta</a></li>
-						<li><a href="car_list.php">Lista samochodów</a></li>
-						<li><a href="learning_materials.php">Materiały szkoleniowe</a></li>
-						<li><a href="schedule.php">Terminarz</a></li>
+						<?php
+						
+							$servername = "localhost";
+							$username = "root";
+							$password = "";
+							$dbname = "zdamsam";
+							// Create connection
+							$conn = new mysqli($servername, $username, $password, $dbname);
+							// Check connection
+							if ($conn->connect_error)
+							{
+								die("Connection failed: " . $conn->connect_error);
+							}
+							$email = $_SESSION['login'];
+							$sql = mysqli_query($conn, "SELECT accountType FROM login WHERE email= '$email'");
+							$accountType = mysqli_fetch_array($sql);
+							if($accountType['accountType'] == 1)
+							{
+								echo "<li class='active'><a href='addPracticalScheduleForm.php'>Dodaj zajęcia</a></li>";
+								echo "<li><a href='instructor_form.php'>Dodaj instruktora</a></li>";
+								echo "<li><a href='student_form.php'>Dodaj kursanta</a></li>";
+								echo "<li><a href='car_list.php'>Lista samochodów</a></li>";
+								echo "<li><a href='learning_materials.php'>Materiały szkoleniowe</a></li>";
+								echo "<li><a href='schedule.php'>Terminarz</a></li>";
+							}
+							else if($accountType['accountType'] == 2)
+							{
+								echo "<li><a href='learning_materials.php'>Materiały szkoleniowe</a></li>";
+								echo "<li><a href='schedule.php'>Terminarz</a></li>";
+								echo "<li><a href='progress.php'>Postępy</a></li>";
+							}
+						
+						?>
 						<li><a href="logout.php">Wyloguj się</a></li>
 					</ul>
 				</nav>

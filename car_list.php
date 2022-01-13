@@ -62,7 +62,7 @@
 							if ($result->num_rows > 0) {
 								// output data of each row
 								while($row = $result->fetch_assoc()) {
-									echo "<div class='row'><div class='col'>".$row["picture"]."</div><div class='col-8 text-nowrap'>Marka:".$row["brand"]."<br>Model:".$row["model"]."<br>Rok produkcji:".$row["productionYear"]."<br>Numer rejestracyjny:".$row["regNumber"]."<br>Przebieg:".$row["mileage"]."<br>Data następnego serwisu:".$row["serviceDate"]."<br>Data ważności OC:".$row["ocDate"]."<br>Data ważności AC:".$row["acDate"]."<br></div></div>";
+									echo "<div class='row'><img src='data:image/png;base64,".base64_encode($row['picture'])."/>';<div class='col-8 text-nowrap'>Marka:".$row["brand"]."<br>Model:".$row["model"]."<br>Rok produkcji:".$row["productionYear"]."<br>Numer rejestracyjny:".$row["regNumber"]."<br>Przebieg:".$row["mileage"]."<br>Data następnego serwisu:".$row["serviceDate"]."<br>Data ważności OC:".$row["ocDate"]."<br>Data ważności AC:".$row["acDate"]."<br></div></div>";
 								}
 							} else {
 								echo "0 results";
