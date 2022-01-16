@@ -162,6 +162,13 @@ div.imgcolumn img {
   
 }
 
+img.carpicture
+{
+	width: 400px;
+	padding: 0;
+	padding-bottom: 10px;
+}
+
 div.imgcolumn p 
 {
 	margin-bottom: 40px;	

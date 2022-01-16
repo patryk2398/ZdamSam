@@ -94,7 +94,7 @@ CREATE TABLE IF NOT EXISTS `zdamsam`.`cars` (
   `serviceDate` DATETIME NOT NULL,
   `ocDate` DATETIME NOT NULL,
   `acDate` DATETIME NOT NULL,
-  `picture` LONGBLOB NULL,
+  `picture` VARCHAR(100) NULL,
   PRIMARY KEY (`id_cars`))
 ENGINE = InnoDB;
 
