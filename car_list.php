@@ -38,6 +38,7 @@
 						<li class="active"><a href="car_list.php">Lista samochodów</a></li>
 						<li><a href="learning_materials.php">Materiały szkoleniowe</a></li>
 						<li><a href="schedule.php">Terminarz</a></li>
+						<li><a href='studentList.php'>Kursanci</a></li>
 						<li><a href="logout.php">Wyloguj się</a></li>
 					</ul>
 				</nav>

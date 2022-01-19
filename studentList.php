@@ -51,12 +51,12 @@
 							if($accountType['accountType'] == 1)
 							{
 								echo "<li><a href='addPracticalScheduleForm.php'>Dodaj zajęcia</a></li>";
-								echo "<li class='active'><a href='instructor_form.php'>Dodaj instruktora</a></li>";
+								echo "<li><a href='instructor_form.php'>Dodaj instruktora</a></li>";
 								echo "<li><a href='student_form.php'>Dodaj kursanta</a></li>";
 								echo "<li><a href='car_list.php'>Lista samochodów</a></li>";
 								echo "<li><a href='learning_materials.php'>Materiały szkoleniowe</a></li>";
 								echo "<li><a href='schedule.php'>Terminarz</a></li>";
-								echo "<li><a href='studentList.php'>Kursanci</a></li>";
+                                echo "<li class='active'><a href='studentList.php'>Kursanci</a></li>";
 							}
 							else if($accountType['accountType'] == 2)
 							{
@@ -71,18 +71,38 @@
 				</nav>
 			</header>
 			<main>
-				<h1>Formularz dodawania instruktorów</h1>
-				<form action="instructor_add.php" method="post">
-					<input type="text" placeholder="Imię" class="short" name="name">
-					<input type="text" placeholder="Nazwisko" class="short" name="surname">
-					<input type="email" placeholder="Adres e-mail" class="short" name="email">
-					<input type="tel" placeholder="Numer telefonu" class="short" name="tel">
-					<input type="text" placeholder="PESEL" class="short" name="pesel">
-					<input placeholder="Data ważności uprawnień" class="short" type="text" onfocus="(this.type='date')" name="date">
-					<input type="password" placeholder="Hasło" class="short" name="password">
-					<input type="password" placeholder="Powtórz hasło" class="short">
-					<input type="submit" value="Dodaj instruktora!" class="long button">
-				</form>
+            <h1>Kursanci</h1>
+                <div style="height: 450px; width: 100%; overflow: auto">
+                <?php							
+							$email = $_SESSION['login'];
+							include('dbConnect.php');
+							$records = mysqli_query($con,"SELECT t.name, t.surname, t.id_trainee FROM trainee t
+							INNER JOIN instructor i ON instructor_id_instructor = id_instructor
+							INNER JOIN login ON i.login_id_login = id_login 
+							WHERE email = '$email' AND isArchive = 0");
+
+                            echo '<table class="table table-striped">
+                            <tr>
+                            <th>Imię</th>
+                            <th>Nazwisko</th>
+                            <th>Edycja</th>
+                            </tr>';
+
+							while($data = mysqli_fetch_array($records))
+							{
+								echo "<tr>";
+                                echo "<td>" . $data['name'] . "</td>";
+                                echo "<td>" . $data['surname'] . "</td>";
+                                echo "<td>" . '<a href="editStudentForm.php?id='.$data['id_trainee'].'" class="btn btn-primary" role="button">Edytuj</a>' . "</td>";
+                                echo "</tr>";
+							}	
+
+                            echo "</table>";
+
+                            mysqli_close($con);
+						?>  
+            </div>
+
 			</main>
 		</div>
 		<footer>
@@ -98,6 +118,6 @@
 			</ul>
 		</footer>
 		
-		<script src="js/bootstrap.min.js"></script>
+		<script src="js/bootstrap.min.js">
 	</body>
 </html>

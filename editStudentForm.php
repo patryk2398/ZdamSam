@@ -1,7 +1,9 @@
 <?php
 	session_start();
 	if(!isset($_SESSION['login']))
+	{
 		header("location: login.php");
+	}
 ?>
 
 <!DOCTYPE html>
@@ -53,13 +55,14 @@
 								echo "<li><a href='student_form.php'>Dodaj kursanta</a></li>";
 								echo "<li><a href='car_list.php'>Lista samochodów</a></li>";
 								echo "<li><a href='learning_materials.php'>Materiały szkoleniowe</a></li>";
-								echo "<li ><a href='schedule.php'>Terminarz</a></li>";
+								echo "<li><a href='schedule.php'>Terminarz</a></li>";
+								echo "<li><a href='studentList.php'>Kursanci</a></li>";
 							}
 							else if($accountType['accountType'] == 2)
 							{
 								echo "<li><a href='learning_materials.php'>Materiały szkoleniowe</a></li>";
 								echo "<li><a href='schedule.php'>Terminarz</a></li>";
-								echo "<li class='active'><a href='progress.php'>Postępy</a></li>";
+								echo "<li><a href='progress.php'>Postępy</a></li>";
 							}
 						
 						?>
@@ -68,99 +71,43 @@
 				</nav>
 			</header>
 			<main>
-			<h1>Postępy</h1>
-			<div class="w-100">
-				<div class="mb-4">
-					<div class="d-flex justify-content-between w-100">
-						<div class="d-flex justify-content-start ">
-							<label>Liczba godzin praktycznych</label>
-						</div>
-						<div class="d-flex justify-content-end ">
-							<label>
-								<?php  
-									$practicalHours = 0;
-									$email = $_SESSION['login'];
-									include('dbConnect.php');
-									$records = mysqli_query($con,"SELECT COUNT(1) * 2 AS quantity
-									FROM practicalschedule 
-									INNER JOIN trainee ON trainee_id_trainee = id_trainee
-									INNER JOIN login ON login_id_login = id_login
-									WHERE email = '$email' AND
-									date < NOW()");
-	
-									if($data = mysqli_fetch_array($records))
-									{
-										$practicalHours = $data['quantity'];										
-									}
-									echo $practicalHours;	
-								?>
-							/30</label>
-						</div>
-					</div>					
-					<div class="progress">
-						<div class="progress-bar" role="progressbar" style="width: <?php echo $practicalHours/30*100?>%" aria-valuenow="<?php echo $practicalHours/30*100?>" aria-valuemin="0" aria-valuemax="100"></div>
-					</div>
-				</div>
-				<div class="mb-4">
-					<div class="d-flex justify-content-between w-100">
-							<div class="d-flex justify-content-start ">
-								<label>Liczba godzin teoretycznych</label>
-							</div>
-							<div class="d-flex justify-content-end ">
-								<label>
-									<?php  
-										$practicalHours = 0;
-										$email = $_SESSION['login'];
-										include('dbConnect.php');
-										$records = mysqli_query($con,"SELECT COUNT(1) * 2 AS quantity
-										FROM trainee_has_teoreticalschedule 
-										INNER JOIN trainee ON trainee_id_trainee = id_trainee
-										INNER JOIN login ON login_id_login = id_login
-										INNER JOIN teoreticalschedule ON teoreticalSchedule_id_teoreticalShedule = id_teoreticalShedule
-										WHERE email = '$email' AND
-										date < NOW()");
-		
-										if($data = mysqli_fetch_array($records))
-										{
-											$practicalHours = $data['quantity'];										
-										}
-										echo $practicalHours;	
-									?>
-								/20</label>
-							</div>
-						</div>					
-						<div class="progress">
-							<div class="progress-bar" role="progressbar" style="width: <?php echo $practicalHours/20*100?>%" aria-valuenow="<?php echo $practicalHours/20*100?>" aria-valuemin="0" aria-valuemax="100"></div>
-						</div>
-					</div>
-				</div>
-				
-
-				<?php 
-                        $email = $_SESSION['login'];
+				<h1>Profil kursanta</h1>
+				<form action="editStudent.php" method="post">	
+                    <?php 
+                        $id = $_GET['id'];
                         
                         include('dbConnect.php');
 						$student = mysqli_query($con,
                             "SELECT 
+                            name, 
+                            surname,
                             internalTeoreticalPass,
                             internalPracticalPass,
                             externalTeoreticalPass,
-                            externalPracticalPass
+                            externalPracticalPass,
+                            isArchive
 							FROM trainee 
-							INNER JOIN login ON login_id_login = id_login
-							WHERE email = '$email'");
+							WHERE id_trainee = '$id'");
 
                         if($data = mysqli_fetch_array($student))
                         {
+                            $trainee = "";
+                            $trainee .= $data['name'];
+                            $trainee .= " ";
+                            $trainee .= $data['surname'];
+                            echo '<h3 class="mb-3">'.$trainee.'</h3>';
+
                             $internalTeoreticalPass = $data['internalTeoreticalPass'];
                             $internalPracticalPass = $data['internalPracticalPass'];
                             $externalTeoreticalPass = $data['externalTeoreticalPass'];
                             $externalPracticalPass = $data['externalPracticalPass'];
+                            $isArchive = $data['isArchive'];
                         }
                     ?>
-
-					<div class="form-check mb-2">
-                        <input onclick="return false;" class="form-check-input p-0" type="checkbox" value="1" name="internalTeoreticalPass" 
+                    <input type="hidden" value="<?php echo $id ?>" name="id" >
+                    
+                    <div class="form-check mb-2">
+                        <input class="form-check-input p-0" type="checkbox" value="1" name="internalTeoreticalPass" 
                         <?php if($internalTeoreticalPass == 1) echo "checked"?>>
                         <label class="form-check-label" for="flexCheckDefault">
                             Egzamin teoretyczny wewnętrzny
@@ -168,7 +115,7 @@
                     </div>
 
                     <div class="form-check mb-4">
-                        <input onclick="return false;" class="form-check-input p-0" type="checkbox" value="1" name="internalPracticalPass" 
+                        <input class="form-check-input p-0" type="checkbox" value="1" name="internalPracticalPass" 
                         <?php if($internalPracticalPass == 1) echo "checked"?>>
                         <label class="form-check-label" for="flexCheckDefault">
                             Egzamin praktyczny wewnętrzny
@@ -176,21 +123,31 @@
                     </div>	
 
                     <div class="form-check mb-2">
-                        <input onclick="return false;" class="form-check-input p-0" type="checkbox" value="1" name="externalTeoreticalPass" 
+                        <input class="form-check-input p-0" type="checkbox" value="1" name="externalTeoreticalPass" 
                         <?php if($externalTeoreticalPass == 1) echo "checked"?>>
                         <label class="form-check-label" for="flexCheckDefault">
                             Egzamin teoretyczny państwowy
                         </label>
                     </div>
 
-                    <div class="form-check">
-                        <input onclick="return false;" class="form-check-input p-0" type="checkbox" value="1" name="externalPracticalPass" 
+                    <div class="form-check mb-4">
+                        <input class="form-check-input p-0" type="checkbox" value="1" name="externalPracticalPass" 
                         <?php if($externalPracticalPass == 1) echo "checked"?>>
                         <label class="form-check-label" for="flexCheckDefault">
                             Egzamin praktyczny państwowy
                         </label>
                     </div>
-			</div>
+
+                    <div class="form-check ">
+                        <input class="form-check-input p-0" type="checkbox" value="1" name="isArchive" 
+                        <?php if($isArchive == 1) echo "checked"?>>
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Archwialny
+                        </label>
+                    </div>
+
+					<input type="submit" value="Zapisz" class="long button">
+				</form>
 			</main>
 		</div>
 		<footer>

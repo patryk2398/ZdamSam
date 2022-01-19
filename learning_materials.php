@@ -56,6 +56,7 @@
 								echo "<li><a href='car_list.php'>Lista samochodów</a></li>";
 								echo "<li class='active'><a href='learning_materials.php'>Materiały szkoleniowe</a></li>";
 								echo "<li><a href='schedule.php'>Terminarz</a></li>";
+								echo "<li><a href='studentList.php'>Kursanci</a></li>";
 							}
 							else if($accountType['accountType'] == 2)
 							{
