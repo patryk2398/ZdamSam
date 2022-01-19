@@ -54,17 +54,18 @@ CREATE INDEX `fk_instructor_login1_idx` ON `zdamsam`.`instructor` (`login_id_log
 -- Table `zdamsam`.`trainee`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `zdamsam`.`trainee` (
-  `id_trainee` INT NOT NULL AUTO_INCREMENT,
-  `pesel` VARCHAR(45) NOT NULL,
-  `name` VARCHAR(45) NOT NULL,
-  `surname` VARCHAR(45) NOT NULL,
-  `telephone` VARCHAR(45) NOT NULL,
-  `internalTeoreticalPoints` INT NULL,
-  `internalPracticalPass` TINYINT NULL,
-  `externalTeoreticalPoints` VARCHAR(45) NULL,
-  `externalPracticalPass` TINYINT NULL,
-  `login_id_login` INT NOT NULL,
-  `instructor_id_instructor` INT NOT NULL,
+ `id_trainee` INT NOT NULL AUTO_INCREMENT,
+ `pesel` varchar(45) NOT NULL,
+ `name` varchar(45) NOT NULL,
+ `surname` varchar(45) NOT NULL,
+ `telephone` varchar(45) NOT NULL,
+ `internalTeoreticalPass` tinyint(4) DEFAULT NULL,
+ `internalPracticalPass` tinyint(4) DEFAULT NULL,
+ `externalTeoreticalPass` tinyint(4) DEFAULT NULL,
+ `externalPracticalPass` tinyint(4) DEFAULT NULL,
+ `isArchive` tinyint(4) NOT NULL,
+ `login_id_login` int(11) NOT NULL,
+ `instructor_id_instructor` int(11) NOT NULL,
   PRIMARY KEY (`id_trainee`, `login_id_login`),
   CONSTRAINT `fk_trainee_login1`
     FOREIGN KEY (`login_id_login`)
