@@ -1,0 +1,165 @@
+<?php
+	session_start();
+	if(!isset($_SESSION['login']))
+		header("location: login.php");
+?>
+
+<!DOCTYPE html>
+<html lang="pl">
+	<head>
+	
+		<meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<title>ZdamSam!</title>
+		
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		
+		<link rel="shortcut icon" href="graphics/favicon.ico" type="image/x-icon">
+		<link rel="icon" href="graphics/favicon.ico" type="image/x-icon">
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/style.css">
+		
+	</head>
+	<body>
+		<div class="content">
+			<header>
+				<img src="graphics/logo.svg" class="logo">
+				<nav>
+					<ul>
+						<?php
+						
+							$servername = "localhost";
+							$username = "root";
+							$password = "";
+							$dbname = "zdamsam";
+							// Create connection
+							$conn = new mysqli($servername, $username, $password, $dbname);
+							// Check connection
+							if ($conn->connect_error)
+							{
+								die("Connection failed: " . $conn->connect_error);
+							}
+							$email = $_SESSION['login'];
+							$sql = mysqli_query($conn, "SELECT accountType FROM login WHERE email= '$email'");
+							$accountType = mysqli_fetch_array($sql);
+							if($accountType['accountType'] == 1)
+							{
+								echo "<li><a href='addPracticalScheduleForm.php'>Dodaj zajęcia</a></li>";
+								echo "<li><a href='instructor_form.php'>Dodaj instruktora</a></li>";
+								echo "<li><a href='student_form.php'>Dodaj kursanta</a></li>";
+								echo "<li><a href='car_list.php'>Lista samochodów</a></li>";
+								echo "<li><a href='learning_materials.php'>Materiały szkoleniowe</a></li>";
+								echo "<li class='active'><a href='schedule.php'>Terminarz</a></li>";
+								echo "<li><a href='studentList.php'>Kursanci</a></li>";
+							}
+							else if($accountType['accountType'] == 2)
+							{
+								echo "<li><a href='learning_materials.php'>Materiały szkoleniowe</a></li>";
+								echo "<li class='active'><a href='studentSchedule.php'>Terminarz</a></li>";
+								echo "<li><a href='progress.php'>Postępy</a></li>";
+							}
+						
+						?>
+						<li><a href="logout.php">Wyloguj się</a></li>
+					</ul>
+				</nav>
+			</header>
+			<main>
+			<h1>Terminarz zajęć</h1>			
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<?php 
+							if (empty($_GET)) {
+								$date = date("Y/m/d");
+							}
+							else{
+								$date = $_GET['date'];
+							}
+							
+							$day = date('w');
+							$week_start = date('d-m-Y', strtotime($date .'-'.$day.' days'));
+						?>
+						<?php for ($i = 0; $i < 6; $i++): ?>
+							<td>
+								<?php 
+								if($i != 0)
+									echo date('d-m-Y', strtotime($week_start. "+$i days"));
+								 ?>
+							</td>
+						<?php endfor; ?>
+					</tr>
+				</thead>
+				<tbody>
+					<?php for ($i = 0; $i < 8; $i+=2): ?>
+						<tr></tr>
+						<th scope="row"><?php echo((8 + $i). ":00-". (10 + $i). ":00")?></th>
+						<?php for ($j = 1; $j < 6; $j++): ?>
+							<?php 
+								$email = $_SESSION['login'];
+								$date = date('Y-m-d H:i:s', strtotime($week_start. "+$j days +". (8 + $i). "hours"));
+								include('dbConnect.php');
+								$practical = mysqli_query($con,"SELECT 'Praktyka'
+								FROM trainee t
+								INNER  JOIN practicalschedule ps ON t.id_trainee = ps.trainee_id_trainee
+								INNER JOIN login l ON t.login_id_login = l.id_login
+								WHERE l.email = '$email'
+								AND ps.date = '$date'
+								LIMIT 1");
+
+                                $teoretical = mysqli_query($con,"SELECT 'teoria'
+                                FROM teoreticalschedule t
+                                INNER JOIN trainee_has_teoreticalschedule tt ON t.id_teoreticalShedule = tt.teoreticalSchedule_id_teoreticalShedule
+                                INNER JOIN trainee tr ON tt.trainee_id_trainee = tr.id_trainee
+                                INNER JOIN login l ON tr.login_id_login = l.id_login
+                                WHERE l.email = '$email'
+                                AND t.date = '$date'
+                                LIMIT 1");
+
+								if($data = mysqli_fetch_array($practical))
+								{
+									echo "<td class=\"bg-warning\">Praktyka</td>";
+								}
+                                else if(mysqli_fetch_array($teoretical))
+								{
+									echo "<td class=\"bg-warning\">Teoria</td>";
+								}	
+								else
+								{
+									echo "<td class=\"bg-success\"></td>";
+								}						
+							?>							
+						<?php endfor; ?>
+					<?php endfor; ?>		
+				</tbody>
+				</table>
+				<div class="d-flex justify-content-between w-100">
+					<div class="d-flex justify-content-start ">
+						<a href="studentSchedule.php?date=<?php echo date('d-m-Y', strtotime($date . '-6 days')); ?>" class="btn btn-primary"><</a>
+					</div>
+					<div class="d-flex justify-content-end ">
+						<a href="studentSchedule.php?date=<?php echo date('d-m-Y', strtotime($date . '+8 days')); ?>" class="btn btn-primary">></a>
+					</div>
+				</div>
+			</main>
+		</div>
+		<footer>
+			<ul class="bottom-left-nav">
+				<li>O ZdamSam!</li>
+				<li>Cennik</li>
+				<li>Kontakt</li>
+			</ul>
+			<p>&copy; ZdamSam! 2021. Wszelkie prawa zastrzeżone.</p>
+			<ul>
+				<li>Regulamin</li>
+				<li>Polityka prywatności</li>
+			</ul>
+		</footer>
+		
+		<script src="js/bootstrap.min.js">
+	</body>
+</html>

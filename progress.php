@@ -58,7 +58,7 @@
 							else if($accountType['accountType'] == 2)
 							{
 								echo "<li><a href='learning_materials.php'>Materiały szkoleniowe</a></li>";
-								echo "<li><a href='schedule.php'>Terminarz</a></li>";
+								echo "<li><a href='studentSchedule.php'>Terminarz</a></li>";
 								echo "<li class='active'><a href='progress.php'>Postępy</a></li>";
 							}
 						

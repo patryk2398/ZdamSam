@@ -23,7 +23,7 @@ if ($user&&$pass)
 	session_start();
 	$_SESSION['login'] = $dbusername;
 	$_SESSION['accountType'] = $dbaccountType;
-	header("location: schedule.php");
+	header("location: studentSchedule.php");
 	}
 	  
 	}
