@@ -72,7 +72,7 @@
 			</header>
 			<main>
 				<h1>Formularz dodawania pojazdów</h1>
-				<form action="dbAddCar.php" method="post">
+				<form action="dbAddCar.php" method="post" enctype="multipart/form-data">
 					<input type="text" name="brand" placeholder="Marka" class="short">
 					<input type="text" name="model" placeholder="Model" class="short">
 					<input type="text" name="productionYear" placeholder="Rok Produkcji" class="short">
@@ -80,8 +80,9 @@
 					<input type="text" name="mileage" placeholder="Przebieg" class="short">					
 					<input type="text" name="serviceDate" placeholder="Data Serwisowania" class="short" onfocus="(this.type='date')">					
 					<input type="text" name="ocDate" placeholder="Data OC" class="short" onfocus="(this.type='date')">				
-					<input type="text" name="acDate" placeholder="Data AC" class="short" onfocus="(this.type='date')">										
-					<input type="submit" value="Dodaj pojazd!" class="long button">
+					<input type="text" name="acDate" placeholder="Data AC" class="short" onfocus="(this.type='date')">	
+					<input type="file" name="carPhoto" placeholder="Zdjęcie samochodu" class="long">						
+					<input type="submit" name="submit" value="Dodaj pojazd!" class="long button">
 				</form>
 			</main>
 		</div>
