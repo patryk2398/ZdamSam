@@ -71,24 +71,35 @@
 				</nav>
 			</header>
 			<main>
-				<h1>Formularz dodawania kursantów</h1>
-				<form>
-					<input type="text" placeholder="Nazwa użytkownika" class="long">
-					<input type="text" placeholder="Imię" class="short">
-					<input type="text" placeholder="Nazwisko" class="short">
-					<input type="email" placeholder="Adres e-mail" class="short">
-					<input type="tel" placeholder="Numer telefonu" class="short">
-					<input list="instructors" placeholder="Instruktor" class="long">
-					<datalist id="instructors">
-						<option value="Test1">
-						<option value="Test2">
-						<option value="Test3">
-					  </datalist>
-					<input type="password" placeholder="Hasło" class="short">
-					<input type="password" placeholder="Powtórz hasło" class="short">
-					<input type="submit" value="Dodaj kursanta!" class="long button">
-				</form>
-			</main>
+				<h1>Materiały dla kursantów</h1>			
+				<div style="display:grid; grid-template-columns: 250px 250px; grid-row: auto auto; grid-column-gap: 50px; grid-row-gap: 30px;">
+					
+					<a href="./materials/Lesson1.pdf" download="Lekcja 1" style=" display:flex; align-items:center; justify-content:center; margin-top:20px;">				
+						<img src="./graphics/pdf-logo.png" alt="Lekcja 1" width="100" height="100">
+						<h4>Lekcja 1</h4>
+					</a>
+					<a href="./materials/Lesson2.pdf" download="Lekcja 2" style=" display:flex; align-items:center; justify-content:center; margin-top:20px; ">				
+						<img src="./graphics/pdf-logo.png" alt="Lekcja 2" width="100" height="100" >
+						<h4>Lekcja 2</h4>
+					</a>					
+					<a href="./materials/Lesson3.pdf" download="Lekcja 3" style=" display:flex; align-items:center; justify-content:center;">				
+						<img src="./graphics/pdf-logo.png" alt="Lekcja 3" width="100" height="100">
+						<h4>Lekcja 3</h4>
+					</a>
+					<a href="./materials/Lesson4.pdf" download="Lekcja 4" style=" display:flex; align-items:center; justify-content:center;">				
+						<img src="./graphics/pdf-logo.png" alt="Lekcja 4" width="100" height="100">
+						<h4>Lekcja 4</h4>
+					</a>					
+					<a href="./materials/Lesson5.pdf" download="Lekcja 5" style=" display:flex; align-items:center; justify-content:center;">				
+						<img src="./graphics/pdf-logo.png" alt="Lekcja 5" width="100" height="100">
+						<h4>Lekcja 5</h4>
+					</a>					
+					<a href="./materials/Lesson6.pdf" download="Lekcja 6" style=" display:flex; align-items:center; justify-content:center;">				
+						<img src="./graphics/pdf-logo.png" alt="Lekcja 6" width="100" height="100">
+						<h4>Lekcja 6</h4>
+					</a>					
+				</div>			
+			</main>			
 		</div>
 		<footer>
 			<ul class="bottom-left-nav">
