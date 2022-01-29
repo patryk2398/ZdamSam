@@ -111,6 +111,7 @@
 								$car .= $data['regNumber'];
 
 								echo "<option value='". $car ."'>";
+								$car = '';
 							}	
 						?>  
 					</datalist>
