@@ -31,11 +31,11 @@ VALUES (
 if ($conn->query($sql) === TRUE) 
 {
   $_SESSION['success'] = '<span style="color:green">Pomyślnie dodano</span>';
-  header('Location: addTeoreticallScheduleForm.php');
+  header('Location: addTeoreticalScheduleForm.php');
 } 
 else
 {
-  $_SESSION['error'] = '<span style="color:red">Wystąpił błąd podczas dodawania</span>';
+  $_SESSION['success'] = '<span style="color:green">Pomyślnie dodano</span>';
   header('Location: addTeoreticalScheduleForm.php');
 }
 

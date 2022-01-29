@@ -26,7 +26,7 @@ VALUES (
     (SELECT id_instructor FROM instructor INNER JOIN login ON login_id_login = id_login WHERE email = '$email')
     )";
 
-$result = mysqli_query($conn, $sql) or trigger_error("Query Failed! SQL: $sql - Error: ".mysqli_error($conn), E_USER_ERROR);
+//$result = mysqli_query($conn, $sql) or trigger_error("Query Failed! SQL: $sql - Error: ".mysqli_error($conn), E_USER_ERROR);
 
 
 if ($conn->query($sql) === TRUE) 
