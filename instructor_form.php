@@ -83,6 +83,18 @@
 					<input type="password" placeholder="Powtórz hasło" class="short">
 					<input type="submit" value="Dodaj instruktora!" class="long button">
 				</form>
+				<?php
+					if(isset($_SESSION['error']))
+					{
+						echo $_SESSION['error'];
+						unset($_SESSION['error']);
+					}						
+					if(isset($_SESSION['success']))
+					{
+						echo $_SESSION['success'];
+						unset($_SESSION['success']);
+					}						
+				?>
 			</main>
 		</div>
 		<footer>

@@ -1,4 +1,5 @@
 <?php
+session_start();
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -21,23 +22,28 @@ $password = $_POST['password'];
 $email = $_POST['email'];
 $instructor = $_POST['instructor'];
 
+if($email == "") {
+  $_SESSION['error'] = '<span style="color:red; margin-top: -50px">Wystąpił błąd podczas dodawania</span>';
+  header('Location: student_form.php');
+  return;
+  }
 
 $sql = "INSERT INTO `login`(`email`, `password`, `accountType`) VALUES ('$email', '$password', 2);";
 
-if ($conn->query($sql) === TRUE) {
-    echo "New records created successfully";
-  } else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
-  }
+if ($conn->query($sql) === FALSE) {
+  $_SESSION['error'] = '<span style="color:red; margin-top: -50px">Wystąpił błąd podczas dodawania</span>';
+  header('Location: student_form.php');
+  } 
  
 $last_id = $conn->insert_id;
 $sql2= "INSERT INTO `trainee`(`pesel`, `name`, `surname`, `telephone`, `instructor_id_instructor`, `login_id_login`) VALUES ('$pesel','$name','$surname','$telephone','$instructor', '$last_id')";
 
 if ($conn->query($sql2) === TRUE) {
-  echo "New records created successfully";
-  // header("Location:instructor_form.html");
+  $_SESSION['success'] = '<span style="color:green; margin-top: -50px">Pomyślnie dodano</span>';
+  header('Location: student_form.php');
 } else {
-  echo "Error: " . $sql2 . "<br>" . $conn->error;
+  $_SESSION['error'] = '<span style="color:red; margin-top: -50px">Wystąpił błąd podczas dodawania</span>';
+  header('Location: student_form.php');
 }
 
 

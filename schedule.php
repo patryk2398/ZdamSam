@@ -143,10 +143,10 @@
 				</table>
 				<div class="d-flex justify-content-between w-100">
 					<div class="d-flex justify-content-start ">
-						<a href="schedule.php?date=<?php echo date('d-m-Y', strtotime($date . '-6 days')); ?>" class="btn btn-primary"><</a>
+						<a href="schedule.php?date=<?php echo date('d-m-Y', strtotime($date . '-12 days')); ?>" class="btn btn-primary"><</a>
 					</div>
 					<div class="d-flex justify-content-end ">
-						<a href="schedule.php?date=<?php echo date('d-m-Y', strtotime($date . '+8 days')); ?>" class="btn btn-primary">></a>
+						<a href="schedule.php?date=<?php echo date('d-m-Y', strtotime($date . '+2 days')); ?>" class="btn btn-primary">></a>
 					</div>
 				</div>
 			</main>

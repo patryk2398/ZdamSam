@@ -45,7 +45,7 @@
 			</header>
 			<main>
 				<h1>Lista Samochodów</h1>		
-				<div class="container">
+				<div class="container" style="overflow-y: scroll; height:450px;">
 				<?php
 							$servername = "localhost";
 							$username = "root";
